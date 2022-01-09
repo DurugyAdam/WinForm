@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="sportirodaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="nevezes">
+          <Key>
+            <PropertyRef Name="nevezes_id" />
+          </Key>
+          <Property Name="nevezes_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="verseny_id" Type="int" />
+          <Property Name="versenyzo_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tipus">
+          <Key>
+            <PropertyRef Name="tipus_id" />
+          </Key>
+          <Property Name="tipus_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nev" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="verseny">
+          <Key>
+            <PropertyRef Name="verseny_id" />
+          </Key>
+          <Property Name="verseny_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipus_id" Type="int" />
+          <Property Name="nevezesi_dij" Type="int" />
+          <Property Name="datum" Type="date" />
+          <Property Name="kezdesido" Type="time" Precision="7" />
+          <Property Name="szintido" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="versenyzo">
+          <Key>
+            <PropertyRef Name="versenyzo_id" />
+          </Key>
+          <Property Name="versenyzo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nev" Type="varchar" MaxLength="30" />
+          <Property Name="szuldatum" Type="date" />
+          <Property Name="nem" Type="int" />
+          <Property Name="email" Type="varchar" MaxLength="35" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'sportiroda.dbo.OsszesAdat' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OsszesAdat">
+          <Key>
+            <PropertyRef Name="nevezes_id" />
+            <PropertyRef Name="nem" />
+          </Key>
+          <Property Name="nevezes_id" Type="int" Nullable="false" />
+          <Property Name="vnev" Type="varchar" MaxLength="30" />
+          <Property Name="szuldatum" Type="int" />
+          <Property Name="nem" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="nev" Type="varchar" MaxLength="30" />
+          <Property Name="datum" Type="date" />
+          <Property Name="kezdesido" Type="time" Precision="7" />
+          <Property Name="szintido" Type="time" Precision="7" />
+          <Property Name="nevezesi_dij" Type="int" />
+          <Property Name="email" Type="varchar" MaxLength="35" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'sportiroda.dbo.Versenyek' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Versenyek">
+          <Property Name="nev" Type="varchar" MaxLength="30" />
+          <Property Name="nevezesi_dij" Type="int" />
+          <Property Name="datum" Type="date" />
+          <Property Name="kezdesido" Type="time" Precision="7" />
+          <Property Name="szintido" Type="time" Precision="7" />
+        </EntityType>-->
+        <Association Name="FK_nevezes_verseny">
+          <End Role="verseny" Type="Self.verseny" Multiplicity="0..1" />
+          <End Role="nevezes" Type="Self.nevezes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="verseny">
+              <PropertyRef Name="verseny_id" />
+            </Principal>
+            <Dependent Role="nevezes">
+              <PropertyRef Name="verseny_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nevezes_versenyzo">
+          <End Role="versenyzo" Type="Self.versenyzo" Multiplicity="0..1" />
+          <End Role="nevezes" Type="Self.nevezes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="versenyzo">
+              <PropertyRef Name="versenyzo_id" />
+            </Principal>
+            <Dependent Role="nevezes">
+              <PropertyRef Name="versenyzo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_verseny_tipus">
+          <End Role="tipus" Type="Self.tipus" Multiplicity="0..1" />
+          <End Role="verseny" Type="Self.verseny" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipus">
+              <PropertyRef Name="tipus_id" />
+            </Principal>
+            <Dependent Role="verseny">
+              <PropertyRef Name="tipus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sportirodaModelStoreContainer">
+          <EntitySet Name="nevezes" EntityType="Self.nevezes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipus" EntityType="Self.tipus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="verseny" EntityType="Self.verseny" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="versenyzo" EntityType="Self.versenyzo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OsszesAdat" EntityType="Self.OsszesAdat" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OsszesAdat].[nevezes_id] AS [nevezes_id], 
+    [OsszesAdat].[vnev] AS [vnev], 
+    [OsszesAdat].[szuldatum] AS [szuldatum], 
+    [OsszesAdat].[nem] AS [nem], 
+    [OsszesAdat].[nev] AS [nev], 
+    [OsszesAdat].[datum] AS [datum], 
+    [OsszesAdat].[kezdesido] AS [kezdesido], 
+    [OsszesAdat].[szintido] AS [szintido], 
+    [OsszesAdat].[nevezesi_dij] AS [nevezesi_dij], 
+    [OsszesAdat].[email] AS [email]
+    FROM [dbo].[OsszesAdat] AS [OsszesAdat]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_nevezes_verseny" Association="Self.FK_nevezes_verseny">
+            <End Role="verseny" EntitySet="verseny" />
+            <End Role="nevezes" EntitySet="nevezes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nevezes_versenyzo" Association="Self.FK_nevezes_versenyzo">
+            <End Role="versenyzo" EntitySet="versenyzo" />
+            <End Role="nevezes" EntitySet="nevezes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_verseny_tipus" Association="Self.FK_verseny_tipus">
+            <End Role="tipus" EntitySet="tipus" />
+            <End Role="verseny" EntitySet="verseny" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sportirodaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="nevezes">
+          <Key>
+            <PropertyRef Name="nevezes_id" />
+          </Key>
+          <Property Name="nevezes_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="verseny_id" Type="Int32" />
+          <Property Name="versenyzo_id" Type="Int32" />
+          <NavigationProperty Name="verseny" Relationship="Self.FK_nevezes_verseny" FromRole="nevezes" ToRole="verseny" />
+          <NavigationProperty Name="versenyzo" Relationship="Self.FK_nevezes_versenyzo" FromRole="nevezes" ToRole="versenyzo" />
+        </EntityType>
+        <EntityType Name="tipus">
+          <Key>
+            <PropertyRef Name="tipus_id" />
+          </Key>
+          <Property Name="tipus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nev" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="verseny" Relationship="Self.FK_verseny_tipus" FromRole="tipus" ToRole="verseny" />
+        </EntityType>
+        <EntityType Name="verseny">
+          <Key>
+            <PropertyRef Name="verseny_id" />
+          </Key>
+          <Property Name="verseny_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipus_id" Type="Int32" />
+          <Property Name="nevezesi_dij" Type="Int32" />
+          <Property Name="datum" Type="DateTime" Precision="0" />
+          <Property Name="kezdesido" Type="Time" Precision="7" />
+          <Property Name="szintido" Type="Time" Precision="7" />
+          <NavigationProperty Name="nevezes" Relationship="Self.FK_nevezes_verseny" FromRole="verseny" ToRole="nevezes" />
+          <NavigationProperty Name="tipus" Relationship="Self.FK_verseny_tipus" FromRole="verseny" ToRole="tipus" />
+        </EntityType>
+        <EntityType Name="versenyzo">
+          <Key>
+            <PropertyRef Name="versenyzo_id" />
+          </Key>
+          <Property Name="versenyzo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nev" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="szuldatum" Type="DateTime" Precision="0" />
+          <Property Name="nem" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="nevezes" Relationship="Self.FK_nevezes_versenyzo" FromRole="versenyzo" ToRole="nevezes" />
+        </EntityType>
+        <EntityType Name="OsszesAdat">
+          <Key>
+            <PropertyRef Name="nevezes_id" />
+            <PropertyRef Name="nem" />
+          </Key>
+          <Property Name="nevezes_id" Type="Int32" Nullable="false" />
+          <Property Name="vnev" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="szuldatum" Type="Int32" />
+          <Property Name="nem" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nev" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="datum" Type="DateTime" Precision="0" />
+          <Property Name="kezdesido" Type="Time" Precision="7" />
+          <Property Name="szintido" Type="Time" Precision="7" />
+          <Property Name="nevezesi_dij" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_nevezes_verseny">
+          <End Role="verseny" Type="Self.verseny" Multiplicity="0..1" />
+          <End Role="nevezes" Type="Self.nevezes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="verseny">
+              <PropertyRef Name="verseny_id" />
+            </Principal>
+            <Dependent Role="nevezes">
+              <PropertyRef Name="verseny_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nevezes_versenyzo">
+          <End Role="versenyzo" Type="Self.versenyzo" Multiplicity="0..1" />
+          <End Role="nevezes" Type="Self.nevezes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="versenyzo">
+              <PropertyRef Name="versenyzo_id" />
+            </Principal>
+            <Dependent Role="nevezes">
+              <PropertyRef Name="versenyzo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_verseny_tipus">
+          <End Role="tipus" Type="Self.tipus" Multiplicity="0..1" />
+          <End Role="verseny" Type="Self.verseny" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipus">
+              <PropertyRef Name="tipus_id" />
+            </Principal>
+            <Dependent Role="verseny">
+              <PropertyRef Name="tipus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sportirodaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="nevezes" EntityType="Self.nevezes" />
+          <EntitySet Name="tipus" EntityType="Self.tipus" />
+          <EntitySet Name="verseny" EntityType="Self.verseny" />
+          <EntitySet Name="versenyzo" EntityType="Self.versenyzo" />
+          <EntitySet Name="OsszesAdat" EntityType="Self.OsszesAdat" />
+          <AssociationSet Name="FK_nevezes_verseny" Association="Self.FK_nevezes_verseny">
+            <End Role="verseny" EntitySet="verseny" />
+            <End Role="nevezes" EntitySet="nevezes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nevezes_versenyzo" Association="Self.FK_nevezes_versenyzo">
+            <End Role="versenyzo" EntitySet="versenyzo" />
+            <End Role="nevezes" EntitySet="nevezes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_verseny_tipus" Association="Self.FK_verseny_tipus">
+            <End Role="tipus" EntitySet="tipus" />
+            <End Role="verseny" EntitySet="verseny" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sportirodaModelStoreContainer" CdmEntityContainer="sportirodaEntities">
+          <EntitySetMapping Name="nevezes">
+            <EntityTypeMapping TypeName="sportirodaModel.nevezes">
+              <MappingFragment StoreEntitySet="nevezes">
+                <ScalarProperty Name="nevezes_id" ColumnName="nevezes_id" />
+                <ScalarProperty Name="verseny_id" ColumnName="verseny_id" />
+                <ScalarProperty Name="versenyzo_id" ColumnName="versenyzo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipus">
+            <EntityTypeMapping TypeName="sportirodaModel.tipus">
+              <MappingFragment StoreEntitySet="tipus">
+                <ScalarProperty Name="tipus_id" ColumnName="tipus_id" />
+                <ScalarProperty Name="nev" ColumnName="nev" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="verseny">
+            <EntityTypeMapping TypeName="sportirodaModel.verseny">
+              <MappingFragment StoreEntitySet="verseny">
+                <ScalarProperty Name="verseny_id" ColumnName="verseny_id" />
+                <ScalarProperty Name="tipus_id" ColumnName="tipus_id" />
+                <ScalarProperty Name="nevezesi_dij" ColumnName="nevezesi_dij" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="kezdesido" ColumnName="kezdesido" />
+                <ScalarProperty Name="szintido" ColumnName="szintido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="versenyzo">
+            <EntityTypeMapping TypeName="sportirodaModel.versenyzo">
+              <MappingFragment StoreEntitySet="versenyzo">
+                <ScalarProperty Name="versenyzo_id" ColumnName="versenyzo_id" />
+                <ScalarProperty Name="nev" ColumnName="nev" />
+                <ScalarProperty Name="szuldatum" ColumnName="szuldatum" />
+                <ScalarProperty Name="nem" ColumnName="nem" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OsszesAdat">
+            <EntityTypeMapping TypeName="sportirodaModel.OsszesAdat">
+              <MappingFragment StoreEntitySet="OsszesAdat">
+                <ScalarProperty Name="nevezes_id" ColumnName="nevezes_id" />
+                <ScalarProperty Name="vnev" ColumnName="vnev" />
+                <ScalarProperty Name="szuldatum" ColumnName="szuldatum" />
+                <ScalarProperty Name="nem" ColumnName="nem" />
+                <ScalarProperty Name="nev" ColumnName="nev" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="kezdesido" ColumnName="kezdesido" />
+                <ScalarProperty Name="szintido" ColumnName="szintido" />
+                <ScalarProperty Name="nevezesi_dij" ColumnName="nevezesi_dij" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

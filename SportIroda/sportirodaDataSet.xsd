@@ -284,6 +284,26 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VersenyekTableAdapter" GeneratorDataComponentClassName="VersenyekTableAdapter" Name="Versenyek" UserDataComponentName="VersenyekTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="sportirodaConnectionString (Settings)" DbObjectName="sportiroda.dbo.Versenyek" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT nev, nevezesi_dij, datum, kezdesido, szintido FROM dbo.Versenyek</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nev" DataSetColumn="nev" />
+              <Mapping SourceColumn="nevezesi_dij" DataSetColumn="nevezesi_dij" />
+              <Mapping SourceColumn="datum" DataSetColumn="datum" />
+              <Mapping SourceColumn="kezdesido" DataSetColumn="kezdesido" />
+              <Mapping SourceColumn="szintido" DataSetColumn="szintido" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -292,7 +312,7 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
   <xs:element name="sportirodaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="sportirodaDataSet" msprop:Generator_UserDSName="sportirodaDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="nevezes" msprop:Generator_TableClassName="nevezesDataTable" msprop:Generator_TableVarName="tablenevezes" msprop:Generator_TablePropName="nevezes" msprop:Generator_RowDeletingName="nevezesRowDeleting" msprop:Generator_RowChangingName="nevezesRowChanging" msprop:Generator_RowEvHandlerName="nevezesRowChangeEventHandler" msprop:Generator_RowDeletedName="nevezesRowDeleted" msprop:Generator_UserTableName="nevezes" msprop:Generator_RowChangedName="nevezesRowChanged" msprop:Generator_RowEvArgName="nevezesRowChangeEvent" msprop:Generator_RowClassName="nevezesRow">
+        <xs:element name="nevezes" msprop:Generator_TableClassName="nevezesDataTable" msprop:Generator_TableVarName="tablenevezes" msprop:Generator_RowChangedName="nevezesRowChanged" msprop:Generator_TablePropName="nevezes" msprop:Generator_RowDeletingName="nevezesRowDeleting" msprop:Generator_RowChangingName="nevezesRowChanging" msprop:Generator_RowEvHandlerName="nevezesRowChangeEventHandler" msprop:Generator_RowDeletedName="nevezesRowDeleted" msprop:Generator_RowClassName="nevezesRow" msprop:Generator_UserTableName="nevezes" msprop:Generator_RowEvArgName="nevezesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="nevezes_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnnevezes_id" msprop:Generator_ColumnPropNameInRow="nevezes_id" msprop:Generator_ColumnPropNameInTable="nevezes_idColumn" msprop:Generator_UserColumnName="nevezes_id" type="xs:int" />
@@ -301,7 +321,7 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="tipus" msprop:Generator_TableClassName="tipusDataTable" msprop:Generator_TableVarName="tabletipus" msprop:Generator_TablePropName="tipus" msprop:Generator_RowDeletingName="tipusRowDeleting" msprop:Generator_RowChangingName="tipusRowChanging" msprop:Generator_RowEvHandlerName="tipusRowChangeEventHandler" msprop:Generator_RowDeletedName="tipusRowDeleted" msprop:Generator_UserTableName="tipus" msprop:Generator_RowChangedName="tipusRowChanged" msprop:Generator_RowEvArgName="tipusRowChangeEvent" msprop:Generator_RowClassName="tipusRow">
+        <xs:element name="tipus" msprop:Generator_TableClassName="tipusDataTable" msprop:Generator_TableVarName="tabletipus" msprop:Generator_RowChangedName="tipusRowChanged" msprop:Generator_TablePropName="tipus" msprop:Generator_RowDeletingName="tipusRowDeleting" msprop:Generator_RowChangingName="tipusRowChanging" msprop:Generator_RowEvHandlerName="tipusRowChangeEventHandler" msprop:Generator_RowDeletedName="tipusRowDeleted" msprop:Generator_RowClassName="tipusRow" msprop:Generator_UserTableName="tipus" msprop:Generator_RowEvArgName="tipusRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="tipus_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columntipus_id" msprop:Generator_ColumnPropNameInRow="tipus_id" msprop:Generator_ColumnPropNameInTable="tipus_idColumn" msprop:Generator_UserColumnName="tipus_id" type="xs:int" />
@@ -315,7 +335,7 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="verseny" msprop:Generator_TableClassName="versenyDataTable" msprop:Generator_TableVarName="tableverseny" msprop:Generator_TablePropName="verseny" msprop:Generator_RowDeletingName="versenyRowDeleting" msprop:Generator_RowChangingName="versenyRowChanging" msprop:Generator_RowEvHandlerName="versenyRowChangeEventHandler" msprop:Generator_RowDeletedName="versenyRowDeleted" msprop:Generator_UserTableName="verseny" msprop:Generator_RowChangedName="versenyRowChanged" msprop:Generator_RowEvArgName="versenyRowChangeEvent" msprop:Generator_RowClassName="versenyRow">
+        <xs:element name="verseny" msprop:Generator_TableClassName="versenyDataTable" msprop:Generator_TableVarName="tableverseny" msprop:Generator_RowChangedName="versenyRowChanged" msprop:Generator_TablePropName="verseny" msprop:Generator_RowDeletingName="versenyRowDeleting" msprop:Generator_RowChangingName="versenyRowChanging" msprop:Generator_RowEvHandlerName="versenyRowChangeEventHandler" msprop:Generator_RowDeletedName="versenyRowDeleted" msprop:Generator_RowClassName="versenyRow" msprop:Generator_UserTableName="verseny" msprop:Generator_RowEvArgName="versenyRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="verseny_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnverseny_id" msprop:Generator_ColumnPropNameInRow="verseny_id" msprop:Generator_ColumnPropNameInTable="verseny_idColumn" msprop:Generator_UserColumnName="verseny_id" type="xs:int" />
@@ -327,7 +347,7 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="versenyzo" msprop:Generator_TableClassName="versenyzoDataTable" msprop:Generator_TableVarName="tableversenyzo" msprop:Generator_TablePropName="versenyzo" msprop:Generator_RowDeletingName="versenyzoRowDeleting" msprop:Generator_RowChangingName="versenyzoRowChanging" msprop:Generator_RowEvHandlerName="versenyzoRowChangeEventHandler" msprop:Generator_RowDeletedName="versenyzoRowDeleted" msprop:Generator_UserTableName="versenyzo" msprop:Generator_RowChangedName="versenyzoRowChanged" msprop:Generator_RowEvArgName="versenyzoRowChangeEvent" msprop:Generator_RowClassName="versenyzoRow">
+        <xs:element name="versenyzo" msprop:Generator_TableClassName="versenyzoDataTable" msprop:Generator_TableVarName="tableversenyzo" msprop:Generator_RowChangedName="versenyzoRowChanged" msprop:Generator_TablePropName="versenyzo" msprop:Generator_RowDeletingName="versenyzoRowDeleting" msprop:Generator_RowChangingName="versenyzoRowChanging" msprop:Generator_RowEvHandlerName="versenyzoRowChangeEventHandler" msprop:Generator_RowDeletedName="versenyzoRowDeleted" msprop:Generator_RowClassName="versenyzoRow" msprop:Generator_UserTableName="versenyzo" msprop:Generator_RowEvArgName="versenyzoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="versenyzo_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnversenyzo_id" msprop:Generator_ColumnPropNameInRow="versenyzo_id" msprop:Generator_ColumnPropNameInTable="versenyzo_idColumn" msprop:Generator_UserColumnName="versenyzo_id" type="xs:int" />
@@ -350,7 +370,7 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OsszesAdat" msprop:Generator_TableClassName="OsszesAdatDataTable" msprop:Generator_TableVarName="tableOsszesAdat" msprop:Generator_TablePropName="OsszesAdat" msprop:Generator_RowDeletingName="OsszesAdatRowDeleting" msprop:Generator_RowChangingName="OsszesAdatRowChanging" msprop:Generator_RowEvHandlerName="OsszesAdatRowChangeEventHandler" msprop:Generator_RowDeletedName="OsszesAdatRowDeleted" msprop:Generator_UserTableName="OsszesAdat" msprop:Generator_RowChangedName="OsszesAdatRowChanged" msprop:Generator_RowEvArgName="OsszesAdatRowChangeEvent" msprop:Generator_RowClassName="OsszesAdatRow">
+        <xs:element name="OsszesAdat" msprop:Generator_TableClassName="OsszesAdatDataTable" msprop:Generator_TableVarName="tableOsszesAdat" msprop:Generator_RowChangedName="OsszesAdatRowChanged" msprop:Generator_TablePropName="OsszesAdat" msprop:Generator_RowDeletingName="OsszesAdatRowDeleting" msprop:Generator_RowChangingName="OsszesAdatRowChanging" msprop:Generator_RowEvHandlerName="OsszesAdatRowChangeEventHandler" msprop:Generator_RowDeletedName="OsszesAdatRowDeleted" msprop:Generator_RowClassName="OsszesAdatRow" msprop:Generator_UserTableName="OsszesAdat" msprop:Generator_RowEvArgName="OsszesAdatRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="nevezes_id" msprop:Generator_ColumnVarNameInTable="columnnevezes_id" msprop:Generator_ColumnPropNameInRow="nevezes_id" msprop:Generator_ColumnPropNameInTable="nevezes_idColumn" msprop:Generator_UserColumnName="nevezes_id" type="xs:int" />
@@ -384,6 +404,23 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Versenyek" msprop:Generator_TableClassName="VersenyekDataTable" msprop:Generator_TableVarName="tableVersenyek" msprop:Generator_TablePropName="Versenyek" msprop:Generator_RowDeletingName="VersenyekRowDeleting" msprop:Generator_RowChangingName="VersenyekRowChanging" msprop:Generator_RowEvHandlerName="VersenyekRowChangeEventHandler" msprop:Generator_RowDeletedName="VersenyekRowDeleted" msprop:Generator_UserTableName="Versenyek" msprop:Generator_RowChangedName="VersenyekRowChanged" msprop:Generator_RowEvArgName="VersenyekRowChangeEvent" msprop:Generator_RowClassName="VersenyekRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nev" msprop:Generator_ColumnVarNameInTable="columnnev" msprop:Generator_ColumnPropNameInRow="nev" msprop:Generator_ColumnPropNameInTable="nevColumn" msprop:Generator_UserColumnName="nev" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nevezesi_dij" msprop:Generator_ColumnVarNameInTable="columnnevezesi_dij" msprop:Generator_ColumnPropNameInRow="nevezesi_dij" msprop:Generator_ColumnPropNameInTable="nevezesi_dijColumn" msprop:Generator_UserColumnName="nevezesi_dij" type="xs:int" minOccurs="0" />
+              <xs:element name="datum" msprop:Generator_ColumnVarNameInTable="columndatum" msprop:Generator_ColumnPropNameInRow="datum" msprop:Generator_ColumnPropNameInTable="datumColumn" msprop:Generator_UserColumnName="datum" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="kezdesido" msprop:Generator_ColumnVarNameInTable="columnkezdesido" msprop:Generator_ColumnPropNameInRow="kezdesido" msprop:Generator_ColumnPropNameInTable="kezdesidoColumn" msprop:Generator_UserColumnName="kezdesido" type="xs:duration" minOccurs="0" />
+              <xs:element name="szintido" msprop:Generator_ColumnVarNameInTable="columnszintido" msprop:Generator_ColumnPropNameInRow="szintido" msprop:Generator_ColumnPropNameInTable="szintidoColumn" msprop:Generator_UserColumnName="szintido" type="xs:duration" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -409,9 +446,9 @@ SELECT versenyzo_id, nev, szuldatum, nem, email FROM versenyzo WHERE (versenyzo_
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_nevezes_verseny" msdata:parent="verseny" msdata:child="nevezes" msdata:parentkey="verseny_id" msdata:childkey="verseny_id" msprop:Generator_UserChildTable="nevezes" msprop:Generator_ChildPropName="GetnevezesRows" msprop:Generator_UserRelationName="FK_nevezes_verseny" msprop:Generator_RelationVarName="relationFK_nevezes_verseny" msprop:Generator_UserParentTable="verseny" msprop:Generator_ParentPropName="versenyRow" />
-      <msdata:Relationship name="FK_nevezes_versenyzo" msdata:parent="versenyzo" msdata:child="nevezes" msdata:parentkey="versenyzo_id" msdata:childkey="versenyzo_id" msprop:Generator_UserChildTable="nevezes" msprop:Generator_ChildPropName="GetnevezesRows" msprop:Generator_UserRelationName="FK_nevezes_versenyzo" msprop:Generator_RelationVarName="relationFK_nevezes_versenyzo" msprop:Generator_UserParentTable="versenyzo" msprop:Generator_ParentPropName="versenyzoRow" />
-      <msdata:Relationship name="FK_verseny_tipus" msdata:parent="tipus" msdata:child="verseny" msdata:parentkey="tipus_id" msdata:childkey="tipus_id" msprop:Generator_UserChildTable="verseny" msprop:Generator_ChildPropName="GetversenyRows" msprop:Generator_UserRelationName="FK_verseny_tipus" msprop:Generator_ParentPropName="tipusRow" msprop:Generator_RelationVarName="relationFK_verseny_tipus" msprop:Generator_UserParentTable="tipus" />
+      <msdata:Relationship name="FK_nevezes_verseny" msdata:parent="verseny" msdata:child="nevezes" msdata:parentkey="verseny_id" msdata:childkey="verseny_id" msprop:Generator_UserChildTable="nevezes" msprop:Generator_ChildPropName="GetnevezesRows" msprop:Generator_UserRelationName="FK_nevezes_verseny" msprop:Generator_ParentPropName="versenyRow" msprop:Generator_RelationVarName="relationFK_nevezes_verseny" msprop:Generator_UserParentTable="verseny" />
+      <msdata:Relationship name="FK_nevezes_versenyzo" msdata:parent="versenyzo" msdata:child="nevezes" msdata:parentkey="versenyzo_id" msdata:childkey="versenyzo_id" msprop:Generator_UserChildTable="nevezes" msprop:Generator_ChildPropName="GetnevezesRows" msprop:Generator_UserRelationName="FK_nevezes_versenyzo" msprop:Generator_ParentPropName="versenyzoRow" msprop:Generator_RelationVarName="relationFK_nevezes_versenyzo" msprop:Generator_UserParentTable="versenyzo" />
+      <msdata:Relationship name="FK_verseny_tipus" msdata:parent="tipus" msdata:child="verseny" msdata:parentkey="tipus_id" msdata:childkey="tipus_id" msprop:Generator_UserChildTable="verseny" msprop:Generator_ChildPropName="GetversenyRows" msprop:Generator_UserRelationName="FK_verseny_tipus" msprop:Generator_RelationVarName="relationFK_verseny_tipus" msprop:Generator_UserParentTable="tipus" msprop:Generator_ParentPropName="tipusRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
